@@ -1,0 +1,39 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    LiquidGlass —— Avalonia 液态玻璃背景类库
+    引用方式：
+      1) 项目引用： <ProjectReference Include="..\..\src\LiquidGlass\LiquidGlass.csproj" />
+      2) 或直接把本目录拷进解决方案。
+
+    宿主项目要求（Avalonia 11 + Skia）：
+      * 必须引用 Avalonia.Skia（Avalonia 模板默认已引用）；
+      * 窗口需要透明背景才看得见玻璃：
+          TransparencyLevelHint="Transparent" Background="Transparent"
+          ExtendClientAreaToDecorationsHint="True" SystemDecorations="None"（推荐）
+      * 仅 Windows 支持真实抓屏；其它平台自动退化为程序化背景（Procedural）。
+  -->
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <!-- 需要 net6+ 才能使用 OperatingSystem.IsWindows()；如需 netstandard2.0 请自行替换该判断 -->
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <AssemblyName>LiquidGlass</AssemblyName>
+    <RootNamespace>LiquidGlass</RootNamespace>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+    <IsPackable>true</IsPackable>
+    <PackageId>LiquidGlass.Avalonia</PackageId>
+    <Version>1.0.0</Version>
+    <Authors>LiquidGlass</Authors>
+    <Description>Avalonia 液态玻璃（Liquid Glass）窗口背景控件：SKSL 着色器 + Magnification API 实时抓屏，可直接在 AXAML 中使用。</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- 只依赖 Avalonia.Skia（会传递 SkiaSharp 2.88.x），不锁定更高版本，便于宿主项目统一 -->
+    <PackageReference Include="Avalonia" Version="11.0.10" />
+    <PackageReference Include="Avalonia.Skia" Version="11.0.10" />
+  </ItemGroup>
+
+</Project>
